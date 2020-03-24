@@ -34,8 +34,8 @@ i = 0; %iteration counter
 instructions = {'Memorize the result of the previous'; 'calculation and carry it over to the next'}; %initial instructions for participant
 
 figure(1)
-plot([0 1],[0 1],'k');
 title('','Color','k')
+plot([0 1],[0 1],'k')
 set(gcf,'WindowState','fullscreen','MenuBar','none','ToolBar','none','Color','k')
 set(gca,'Color','k','XColor','k','YColor','k','FontSize',48)%,'visible','off','xlim',[0 2],'ylim',[0 2],'Position',[0 0 1 1])
 instruct_txt = text(-0.1,0.5,instructions,'Color','w','FontSize',48);

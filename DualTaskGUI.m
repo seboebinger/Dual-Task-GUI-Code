@@ -1,35 +1,35 @@
-function varargout = DualTaskGUI_032420(varargin)
-% DUALTASKGUI_032420 MATLAB code for DualTaskGUI_032420.fig
-%      DUALTASKGUI_032420, by itself, creates a new DUALTASKGUI_032420 or raises the existing
+function varargout = DualTaskGUI(varargin)
+% DUALTASKGUI MATLAB code for DualTaskGUI.fig
+%      DUALTASKGUI, by itself, creates a new DUALTASKGUI or raises the existing
 %      singleton*.
 %
-%      H = DUALTASKGUI_032420 returns the handle to a new DUALTASKGUI_032420 or the handle to
+%      H = DUALTASKGUI returns the handle to a new DUALTASKGUI or the handle to
 %      the existing singleton*.
 %
-%      DUALTASKGUI_032420('CALLBACK',hObject,eventData,handles,...) calls the local
-%      function named CALLBACK in DUALTASKGUI_032420.M with the given input arguments.
+%      DUALTASKGUI('CALLBACK',hObject,eventData,handles,...) calls the local
+%      function named CALLBACK in DUALTASKGUI.M with the given input arguments.
 %
-%      DUALTASKGUI_032420('Property','Value',...) creates a new DUALTASKGUI_032420 or raises the
+%      DUALTASKGUI('Property','Value',...) creates a new DUALTASKGUI or raises the
 %      existing singleton*.  Starting from the left, property value pairs are
-%      applied to the GUI before DualTaskGUI_032420_OpeningFcn gets called.  An
+%      applied to the GUI before DualTaskGUI_OpeningFcn gets called.  An
 %      unrecognized property name or invalid value makes property application
-%      stop.  All inputs are passed to DualTaskGUI_032420_OpeningFcn via varargin.
+%      stop.  All inputs are passed to DualTaskGUI_OpeningFcn via varargin.
 %
 %      *See GUI Options on GUIDE's Tools menu.  Choose "GUI allows only one
 %      instance to run (singleton)".
 %
 % See also: GUIDE, GUIDATA, GUIHANDLES
 
-% Edit the above text to modify the response to help DualTaskGUI_032420
+% Edit the above text to modify the response to help DualTaskGUI
 
-% Last Modified by GUIDE v2.5 24-Mar-2020 10:03:18
+% Last Modified by GUIDE v2.5 24-Mar-2020 15:00:01
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
 gui_State = struct('gui_Name',       mfilename, ...
                    'gui_Singleton',  gui_Singleton, ...
-                   'gui_OpeningFcn', @DualTaskGUI_032420_OpeningFcn, ...
-                   'gui_OutputFcn',  @DualTaskGUI_032420_OutputFcn, ...
+                   'gui_OpeningFcn', @DualTaskGUI_OpeningFcn, ...
+                   'gui_OutputFcn',  @DualTaskGUI_OutputFcn, ...
                    'gui_LayoutFcn',  [] , ...
                    'gui_Callback',   []);
 if nargin && ischar(varargin{1})
@@ -44,26 +44,26 @@ end
 % End initialization code - DO NOT EDIT
 
 
-% --- Executes just before DualTaskGUI_032420 is made visible.
-function DualTaskGUI_032420_OpeningFcn(hObject, eventdata, handles, varargin)
+% --- Executes just before DualTaskGUI is made visible.
+function DualTaskGUI_OpeningFcn(hObject, eventdata, handles, varargin)
 % This function has no output args, see OutputFcn.
 % hObject    handle to figure
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-% varargin   command line arguments to DualTaskGUI_032420 (see VARARGIN)
+% varargin   command line arguments to DualTaskGUI (see VARARGIN)
 
-% Choose default command line output for DualTaskGUI_032420
+% Choose default command line output for DualTaskGUI
 handles.output = hObject;
 
 % Update handles structure
 guidata(hObject, handles);
 
-% UIWAIT makes DualTaskGUI_032420 wait for user response (see UIRESUME)
+% UIWAIT makes DualTaskGUI wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
 
 
 % --- Outputs from this function are returned to the command line.
-function varargout = DualTaskGUI_032420_OutputFcn(hObject, eventdata, handles) 
+function varargout = DualTaskGUI_OutputFcn(hObject, eventdata, handles) 
 % varargout  cell array for returning output args (see VARARGOUT);
 % hObject    handle to figure
 % eventdata  reserved - to be defined in a future version of MATLAB
@@ -135,17 +135,17 @@ clc
 i = 0; %iteration counter
 instructions = {'Memorize the result of the previous'; 'calculation and carry it over to the next'}; %initial instructions for participant
 
-fig1 = figure(1)
+fig1 = figure(1);
 ax1 = plot([0 1],[0 1],'k');
 title('','Color','k')
 set(gcf,'WindowState','fullscreen','MenuBar','none','ToolBar','none','Color','k')
 set(gca,'Color','k','XColor','k','YColor','k','FontSize',48)%,'visible','off','xlim',[0 2],'ylim',[0 2],'Position',[0 0 1 1])
 instruct_txt = text(-0.1,0.5,instructions,'Color','w','FontSize',48);
 
-txt1 = text(0.05,0.8,'Starting Number is ','Color','w','FontSize',80);
-iter = 1;
-i = 1;
-txt2 = text(0.42,0.5,num2str(n(iter,i)),'Color','w','FontSize',150);
+txt1 = text(0.05,0.8,'','Color','w','FontSize',80);
+txt2 = text(0.42,0.5,'','Color','w','FontSize',150);
+txt3 = text(0.42,0.5,'','Color','w','FontSize',150); %What participant will see
+        
 
 disp({'Paused'; 'Relay instructions to participant';'Then click any button to continue'})
 pause
@@ -160,16 +160,16 @@ for iter = 1:trialnum
         %Display instructions and the starting value
         if i==1
             delete(instruct_txt)
-            txt1 = text(0.05,0.8,'Starting Number is ','Color','w','FontSize',80);
-            set(txt1,'String','Starting Number is ')
-            txt2 = text(0.42,0.5,num2str(n(iter,i)),'Color','w','FontSize',150);
-            drawnow
+%             txt1 = text(0.05,0.8,'Starting Number is ','Color','w','FontSize',80);
+            set(txt1,'String','Starting Number is ','Color','w','FontSize',80)
+%             txt2 = text(0.42,0.5,num2str(n(iter,i)),'Color','w','FontSize',150);
+            set(txt2,'String',num2str(n(iter,i)),'Color','w','FontSize',150)
             
             disp(['Trial ' num2str(iter)])
             disp(['Starting Number is ' num2str(n(iter,i))])
             pause(pausetime)
-            delete(txt1)
-            delete(txt2)
+            set(txt1,'String','','Color','w','FontSize',150)
+            set(txt2,'String','','Color','w','FontSize',150)
         end
         
         %Break if 10 operations are generated
@@ -179,9 +179,10 @@ for iter = 1:trialnum
         
         %Display the operation
         disp(['Operation ' num2str(i) ': ' num2str(n(iter,i)) ' ' ops(iter,i) ' ' num2str(num(iter,i)) ' = ' num2str(n(iter,i+1))]) %Full Operation
-        txt3 = text(0.42,0.5,[ops(iter,i) num2str(num(iter,i))],'Color','w','FontSize',150); %What participant will see
+%         txt3 = text(0.42,0.5,[ops(iter,i) num2str(num(iter,i))],'Color','w','FontSize',150); %What participant will see
+        set(txt3,'String',[ops(iter,i) num2str(num(iter,i))],'Color','w','FontSize',150)
         pause(pausetime)
-        delete(txt3)
+%         delete(txt3)
         pause(0.2) %Pause between operations
         
     end
@@ -291,7 +292,8 @@ function displaytime_Callback(hObject, eventdata, handles)
 
 % Hints: get(hObject,'Value') returns position of slider
 %        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
-
+handles.displaytime = get(hObject,'Value');
+guidata(hObject, handles)
 
 % --- Executes during object creation, after setting all properties.
 function displaytime_CreateFcn(hObject, eventdata, handles)
