@@ -1,3 +1,4 @@
+%%
 function varargout = DualTaskGUI(varargin)
 % DUALTASKGUI MATLAB code for DualTaskGUI.fig
 %      DUALTASKGUI, by itself, creates a new DUALTASKGUI or raises the existing
@@ -22,16 +23,16 @@ function varargout = DualTaskGUI(varargin)
 
 % Edit the above text to modify the response to help DualTaskGUI
 
-% Last Modified by GUIDE v2.5 24-Mar-2020 15:00:01
+% Last Modified by GUIDE v2.5 24-Mar-2020 15:14:10
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
 gui_State = struct('gui_Name',       mfilename, ...
-                   'gui_Singleton',  gui_Singleton, ...
-                   'gui_OpeningFcn', @DualTaskGUI_OpeningFcn, ...
-                   'gui_OutputFcn',  @DualTaskGUI_OutputFcn, ...
-                   'gui_LayoutFcn',  [] , ...
-                   'gui_Callback',   []);
+    'gui_Singleton',  gui_Singleton, ...
+    'gui_OpeningFcn', @DualTaskGUI_OpeningFcn, ...
+    'gui_OutputFcn',  @DualTaskGUI_OutputFcn, ...
+    'gui_LayoutFcn',  [] , ...
+    'gui_Callback',   []);
 if nargin && ischar(varargin{1})
     gui_State.gui_Callback = str2func(varargin{1});
 end
@@ -63,7 +64,7 @@ guidata(hObject, handles);
 
 
 % --- Outputs from this function are returned to the command line.
-function varargout = DualTaskGUI_OutputFcn(hObject, eventdata, handles) 
+function varargout = DualTaskGUI_OutputFcn(hObject, eventdata, handles)
 % varargout  cell array for returning output args (see VARARGOUT);
 % hObject    handle to figure
 % eventdata  reserved - to be defined in a future version of MATLAB
@@ -72,19 +73,18 @@ function varargout = DualTaskGUI_OutputFcn(hObject, eventdata, handles)
 % Get default command line output from handles structure
 varargout{1} = handles.output;
 
-
 % --- Executes on button press in Load Set 1.
 function LoadOpSet1(hObject, eventdata, handles)
 % hObject    handle to pushbutton1 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-    handles.UserData = load('Case 1 Operation Set 24-Mar-2020.mat');
-    handles.n   =   handles.UserData.n_Case1;
-    handles.num = handles.UserData.num_Case1;
-    handles.ops = handles.UserData.ops_Case1;
-    
-    guidata(hObject, handles)
-    
+handles.UserData = load('Case 1 Operation Set 24-Mar-2020.mat');
+handles.n   =   handles.UserData.n_Case1;
+handles.num = handles.UserData.num_Case1;
+handles.ops = handles.UserData.ops_Case1;
+
+guidata(hObject, handles)
+
 
 
 % --- Executes on button press in Load Set 2.
@@ -92,10 +92,12 @@ function LoadOpSet2(hObject, eventdata, handles)
 % hObject    handle to pushbutton2 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-    load('Case 2 Operation Set 24-Mar-2020.mat')
-    n =     n_Case2;
-    num = num_Case2;
-    ops = ops_Case2;
+handles.UserData = load('Case 2 Operation Set 24-Mar-2020.mat');
+handles.n   =   handles.UserData.n_Case2;
+handles.num = handles.UserData.num_Case2;
+handles.ops = handles.UserData.ops_Case2;
+
+guidata(hObject, handles)
 
 
 % --- Executes on button press in Load Set 3.
@@ -103,10 +105,12 @@ function LoadOpSet3(hObject, eventdata, handles)
 % hObject    handle to pushbutton3 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-    load('Case 3 Operation Set 24-Mar-2020.mat')
-    n =     n_Case3;
-    num = num_Case3;
-    ops = ops_Case3;
+handles.UserData = load('Case 3 Operation Set 24-Mar-2020.mat');
+handles.n   =   handles.UserData.n_Case3;
+handles.num = handles.UserData.num_Case3;
+handles.ops = handles.UserData.ops_Case3;
+
+guidata(hObject, handles)
 
 
 % --- Executes on button press in pushbutton4.
@@ -127,42 +131,43 @@ opnum = handles.opnum;
 clc
 
 %Load operation set
-    n =     handles.n;
-    num = handles.num;
-    ops = handles.ops;
-
+n =     handles.n;
+num = handles.num;
+ops = handles.ops;
 
 i = 0; %iteration counter
-instructions = {'Memorize the result of the previous'; 'calculation and carry it over to the next'}; %initial instructions for participant
-
-fig1 = figure(1);
-ax1 = plot([0 1],[0 1],'k');
-title('','Color','k')
-set(gcf,'WindowState','fullscreen','MenuBar','none','ToolBar','none','Color','k')
-set(gca,'Color','k','XColor','k','YColor','k','FontSize',48)%,'visible','off','xlim',[0 2],'ylim',[0 2],'Position',[0 0 1 1])
-instruct_txt = text(-0.1,0.5,instructions,'Color','w','FontSize',48);
-
-txt1 = text(0.05,0.8,'','Color','w','FontSize',80);
-txt2 = text(0.42,0.5,'','Color','w','FontSize',150);
-txt3 = text(0.42,0.5,'','Color','w','FontSize',150); %What participant will see
-        
-
-disp({'Paused'; 'Relay instructions to participant';'Then click any button to continue'})
-pause
-clc
 
 for iter = 1:trialnum
+    
+    %Display instructions for the first trial
+    if iter == 1
+            instructions = {'Memorize the result of the previous'; 'calculation and carry it over to the next'}; %initial instructions for participant
+            
+            fig1 = figure(1);
+            ax1 = plot([0 1],[0 1],'k');
+            title('','Color','k')
+            set(gcf,'WindowState','fullscreen','MenuBar','none','ToolBar','none','Color','k')
+            set(gca,'Color','k','XColor','k','YColor','k','FontSize',48)%,'visible','off','xlim',[0 2],'ylim',[0 2],'Position',[0 0 1 1])
+            instruct_txt = text(-0.1,0.5,instructions,'Color','w','FontSize',48);
+            
+            txt1 = text(0.05,0.8,'','Color','w','FontSize',80); %starting number text
+            txt2 = text(0.42,0.5,'','Color','w','FontSize',150); %starting number value
+            txt3 = text(0.42,0.5,'','Color','w','FontSize',150); %operations (what the participant will see)
+            
+            
+            disp({'Paused'; 'Relay instructions to participant';'Then click any button to continue'})
+            pause
+            clc
+    end
     
     while i <= opnum
         
         i = i+1;
         
-        %Display instructions and the starting value
-        if i==1
-            delete(instruct_txt)
-%             txt1 = text(0.05,0.8,'Starting Number is ','Color','w','FontSize',80);
+        %Display the starting value
+        if i==1     
+            set(instruct_txt,'String','')
             set(txt1,'String','Starting Number is ','Color','w','FontSize',80)
-%             txt2 = text(0.42,0.5,num2str(n(iter,i)),'Color','w','FontSize',150);
             set(txt2,'String',num2str(n(iter,i)),'Color','w','FontSize',150)
             
             disp(['Trial ' num2str(iter)])
@@ -179,25 +184,26 @@ for iter = 1:trialnum
         
         %Display the operation
         disp(['Operation ' num2str(i) ': ' num2str(n(iter,i)) ' ' ops(iter,i) ' ' num2str(num(iter,i)) ' = ' num2str(n(iter,i+1))]) %Full Operation
-%         txt3 = text(0.42,0.5,[ops(iter,i) num2str(num(iter,i))],'Color','w','FontSize',150); %What participant will see
         set(txt3,'String',[ops(iter,i) num2str(num(iter,i))],'Color','w','FontSize',150)
         pause(pausetime)
-%         delete(txt3)
         pause(0.2) %Pause between operations
         
     end
     i = 0; %reset iteration counter for while loop
     if iter < trialnum
+        set(txt3,'String','','Color','w','FontSize',150)
         disp('Press any button to continue to next trial')
         pause
         clc
     else
         disp('End of trials')
-        end_txt = text(0.35,0.5,'You did it!','Color','w','FontSize',48);
+        set(txt3,'String','You did it!','Color','w','FontSize',48);
         break
     end
 end
 
+% !!! Need to create a save function that saves the operations that the
+% participant performed.
 
 function patID_Callback(hObject, eventdata, handles)
 % hObject    handle to edit1 (see GCBO)
@@ -240,6 +246,9 @@ function opnum_Callback(hObject, eventdata, handles)
 % Hints: get(hObject,'String') returns contents of edit2 as text
 %        str2double(get(hObject,'String')) returns contents of edit2 as a double
 
+handles.opnum = str2double(get(hObject,'String'));
+guidata(hObject, handles)
+
 
 % --- Executes during object creation, after setting all properties.
 function opnum_CreateFcn(hObject, eventdata, handles)
@@ -253,11 +262,6 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
     set(hObject,'BackgroundColor','white');
 end
 
-% handles.opnum = string2num(get(hObject,'String'));
-handles.opnum = 3;
-guidata(hObject, handles)
-
-
 function trialnum_Callback(hObject, eventdata, handles)
 % hObject    handle to edit3 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
@@ -265,6 +269,9 @@ function trialnum_Callback(hObject, eventdata, handles)
 
 % Hints: get(hObject,'String') returns contents of edit3 as text
 %        str2double(get(hObject,'String')) returns contents of edit3 as a double
+
+handles.trialnum = str2double(get(hObject,'String'));
+guidata(hObject, handles)
 
 
 % --- Executes during object creation, after setting all properties.
@@ -279,10 +286,6 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
     set(hObject,'BackgroundColor','white');
 end
 
-% handles.opnum = string2num(get(hObject,'String'));
-handles.trialnum = 3;
-guidata(hObject, handles)
-
 
 % --- Executes on slider movement.
 function displaytime_Callback(hObject, eventdata, handles)
@@ -295,6 +298,9 @@ function displaytime_Callback(hObject, eventdata, handles)
 handles.displaytime = get(hObject,'Value');
 guidata(hObject, handles)
 
+% !!! Need to include something to display the currect value of the slider
+% in a textbox
+
 % --- Executes during object creation, after setting all properties.
 function displaytime_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to slider3 (see GCBO)
@@ -306,15 +312,35 @@ if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColo
     set(hObject,'BackgroundColor',[.9 .9 .9]);
 end
 
-% handles.opnum = string2num(get(hObject,'String'));
-handles.displaytime = 3;
+handles.displaytime = get(hObject,'Value');
 guidata(hObject, handles)
 
 
-% --- Executes on button press in checkbox1.
-function checkbox1_Callback(hObject, eventdata, handles)
-% hObject    handle to checkbox1 (see GCBO)
+function finalnum_Callback(hObject, eventdata, handles)
+% hObject    handle to edit4 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hint: get(hObject,'Value') returns toggle state of checkbox1
+% Hints: get(hObject,'String') returns contents of edit4 as text
+%        str2double(get(hObject,'String')) returns contents of edit4 as a double
+handles.finalnum = str2double(get(hObject,'String'));
+guidata(hObject, handles)
+
+% !!! Need to Include a log of which trials where correct and which were
+% incorrect. (example below)
+% if handles.finalnum == correct value
+%     log(trial number) = 1;
+% else
+%     log(trial number = 0;
+% end
+% --- Executes during object creation, after setting all properties.
+function finalnum_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to edit4 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
